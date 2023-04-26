@@ -13,6 +13,9 @@ jobs:
 
   teste:
     runs-on: ubuntu-latest #vm
+    strategy:
+      matrix:
+        go_version: ['1.18', '10', '>=1.18']
     steps:
     - uses: actions/checkout@v3 # Repositório do Github da vm
     
@@ -20,7 +23,7 @@ jobs:
     - name: Set up Go 
       uses: actions/setup-go@v3
       with:
-        go-version: 1.19
+        go-version: ${{ matrix.go_version }}
         
     # Construindo o banco no docker
     - name: Build-DB 
